@@ -33,7 +33,8 @@ export type ViewType =
   | 'learn-english'
   | 'quests'
   | 'collection'
-  | 'pet-diary';
+  | 'pet-diary'
+  | 'credits';
 
 export type WasteCategory = 'organic' | 'recyclable' | 'non_usable';
 

@@ -42,6 +42,7 @@ import { EcoPassView } from './views/EcoPassView';
 import { QuestsView } from './views/QuestsView';
 import { CollectionView } from './views/CollectionView';
 import { PetDiaryView } from './views/PetDiaryView';
+import { CreditsView } from './views/CreditsView';
 
 import { GlobalBackground } from './components/GlobalBackground';
 
@@ -865,6 +866,7 @@ export default function App() {
                 onUpdatePetInfo={(updates) => setPetInfo((p) => ({ ...p, ...updates }))}
                 onResetProgress={handleResetProgress}
                 onBack={() => setCurrentView('home')}
+                onOpenCredits={() => setCurrentView('credits')}
               />
             </motion.div>
           )}
@@ -916,6 +918,22 @@ export default function App() {
                 petInfo={petInfo}
                 onSwitchPetSpecies={handleSwitchPetSpecies}
                 onUpdatePetName={handleUpdatePetName}
+              />
+            </motion.div>
+          )}
+
+          {/* 13. CREDITS VIEW */}
+          {currentView === 'credits' && (
+            <motion.div
+              key="credits"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-full h-full"
+            >
+              <CreditsView
+                user={user}
+                onBack={() => setCurrentView('settings')}
               />
             </motion.div>
           )}

@@ -12,7 +12,8 @@ import {
   Languages,
   Target,
   Boxes,
-  BookOpen
+  BookOpen,
+  Award
 } from 'lucide-react';
 import { ViewType, User } from '../types';
 import { sound } from '../utils/sound';
@@ -46,6 +47,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentView, onNavigate,
     { id: 'profile', label: t.profile, icon: UserIcon },
     { id: 'learn-english', label: user.language === 'es' ? 'Inglés' : 'English', icon: Languages },
     { id: 'settings', label: t.settings, icon: SettingsIcon },
+    { id: 'credits', label: user.language === 'es' ? 'Créditos' : 'Credits', icon: Award },
   ];
 
   const handleNavClick = (view: ViewType) => {

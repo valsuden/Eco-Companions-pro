@@ -17,7 +17,8 @@ import {
   User as UserIcon,
   AlertTriangle,
   Heart,
-  HelpCircle
+  HelpCircle,
+  Award
 } from 'lucide-react';
 import { sound } from '../utils/sound';
 import { useI18n, Language } from '../utils/i18n';
@@ -31,6 +32,7 @@ interface SettingsViewProps {
   onUpdatePetInfo: (updates: Partial<PetInfo>) => void;
   onResetProgress: () => void;
   onBack: () => void;
+  onOpenCredits?: () => void;
 }
 
 type SettingsTab = 'system' | 'language' | 'appearance' | 'all';
@@ -42,6 +44,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   onUpdatePetInfo,
   onResetProgress,
   onBack,
+  onOpenCredits,
 }) => {
   const currentLang = user.language || 'en';
   const t = useI18n(currentLang);
@@ -569,6 +572,36 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             user={user} 
             onUpdateUser={onUpdateUser} 
           />
+        )}
+
+        {/* Project Credits Link Banner */}
+        {onOpenCredits && (
+          <div className="p-5 rounded-3xl border border-theme bg-theme-surface flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+            <div className="flex items-center gap-3 text-center sm:text-left">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+                <Award className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-sm text-theme-primary">
+                  {currentLang === 'es' ? 'Créditos del Proyecto' : 'Project Credits'}
+                </h3>
+                <p className="text-xs text-theme-muted mt-0.5">
+                  {currentLang === 'es' ? 'Conoce al equipo, institución y tecnologías de AERIS.' : 'Meet the team, institution, and technologies of AERIS.'}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                sound.playClick();
+                onOpenCredits();
+              }}
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95 shrink-0 flex items-center justify-center gap-2"
+            >
+              <Award className="w-4 h-4" />
+              <span>{currentLang === 'es' ? 'Ver Créditos' : 'View Credits'}</span>
+            </button>
+          </div>
         )}
       </div>
 
